@@ -11,10 +11,7 @@ public class RegistrationTest extends BaseTest {
     public void successRegistration() {
         objConstructorPage.clickPersonalAreaButton();
         objEnterPage.clickRegistrationButton();
-        objRegistrationPage.enterName(name);
-        objRegistrationPage.enterEmail(email);
-        objRegistrationPage.enterPassword(password);
-        objRegistrationPage.clickRegistrationButton();
+        registration();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(objEnterPage.enterButton)));
         assertEquals("Войти", driver.findElement(objEnterPage.enterButton).getText());
     }
@@ -26,7 +23,7 @@ public class RegistrationTest extends BaseTest {
         objEnterPage.clickRegistrationButton();
         objRegistrationPage.enterName(faker.name().firstName());
         objRegistrationPage.enterEmail(faker.internet().emailAddress());
-        objRegistrationPage.enterPassword(String.valueOf(faker.name().firstName().charAt(3)));
+        objRegistrationPage.enterPassword("1");
         objRegistrationPage.clickRegistrationButton();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(objRegistrationPage.errorText)));
         assertEquals("Некорректный пароль", driver.findElement(objRegistrationPage.errorText).getText());

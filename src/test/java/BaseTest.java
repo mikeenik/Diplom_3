@@ -43,7 +43,7 @@ public class BaseTest {
         objPersonalAreaPage = new PersonalAreaPage(driver);
         objRegistrationPage = new RegistrationPage(driver);
         objRecoveryPage = new RecoveryPage(driver);
-        wait = new WebDriverWait(driver, 5000);
+        wait = new WebDriverWait(driver, 10L);
         faker = new Faker();
         name = faker.name().firstName();
         email = faker.internet().emailAddress();
@@ -75,5 +75,18 @@ public class BaseTest {
     @AfterClass
     public static void tearDown(){
         driver.quit();
+    }
+
+    public void registration(){
+        objRegistrationPage.enterName(name);
+        objRegistrationPage.enterEmail(email);
+        objRegistrationPage.enterPassword(password);
+        objRegistrationPage.clickRegistrationButton();
+    }
+
+    public void auth(){
+        objEnterPage.enterEmail(email);
+        objEnterPage.enterPassword(password);
+        objEnterPage.clickEnterButton();
     }
 }
